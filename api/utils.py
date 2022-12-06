@@ -5,6 +5,12 @@ def predict_img(model, img):
     res = (model.predict(new_img)[0, :, :, 0] > 0.5).astype("uint8")
     return res
 
+def get_title(img):
+    if np.any(img):
+        return "Răng sâu"
+    
+    return "Răng thường"
+
 def overlay_img(img, mask):
     new_img = np.array(img).copy()
     pred = np.array(mask)
