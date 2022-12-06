@@ -1,0 +1,13 @@
+.image-review {
+    width: 320px;
+    height: 240px;
+    border: 2px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-review img {
+    width: 320px;
+    height: 240px;
+}
