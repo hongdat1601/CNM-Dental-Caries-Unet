@@ -1,3 +1,41 @@
 .App {
+    /* background-color: #eff5f5; */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* HEADER */
+.header {
+    background-color: #0d4c92;
+    text-align: center;
+    padding: 12px 0;
+}
+
+.header h1 {
+    color: white;
+    font-size: 30px;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+/* CONTENT */
+.content {
+    margin: 20px 0;
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.paragraph {
+    text-indent: 32px;
+    text-align: justify;
+    margin-bottom: 16px;
+}
+
+/* FOOTER */
+.footer {
+    background-color: #eaeaea;
+    padding: 12px 0;
     text-align: center;
 }

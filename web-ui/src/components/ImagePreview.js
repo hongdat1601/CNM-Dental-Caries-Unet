@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import './ImagePreview.css';
+import styles from './ImagePreview.module.css';
 
 function ImagePreview(props) {
     const imgRef = useRef();
@@ -8,7 +8,7 @@ function ImagePreview(props) {
     useEffect(() => {}, []);
 
     return (
-        <div className="image-review">
+        <div className={styles.imageReview}>
             <img
                 src={props.src}
                 alt={props.name}

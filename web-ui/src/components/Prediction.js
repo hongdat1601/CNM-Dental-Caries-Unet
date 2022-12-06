@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { HiArrowNarrowRight } from 'react-icons/hi';
 import instanceApi from '../api/instanceApi';
 import ImagePreview from './ImagePreview';
-import './Prediction.css';
+import styles from './Prediction.module.css';
 
 function Prediction() {
     const [srcImg, setSrcImg] = useState('');
@@ -32,24 +33,36 @@ function Prediction() {
                     setSrcPred('data:image/jpeg;base64,' + data.data.data);
                     setTitlePred(data.data.title);
                 })
-                .catch(() => setSrcPred(''));
+                .catch(() => {
+                    setSrcPred('');
+                    alert('Có gì đó sai sai!');
+                });
         } else {
             alert('Hãy chọn ảnh trước khi chuẩn đoán!');
         }
     };
 
     return (
-        <div className="prediction">
+        <div className={styles.prediction}>
             <div>
-                <input type="file" onChange={fileHandle} />
+                <input
+                    className={styles.fileInput}
+                    type="file"
+                    onChange={fileHandle}
+                />
                 <ImagePreview src={srcImg} name="Original Image" />
             </div>
             <div>
-                <button onClick={predictHandle}>Chuẩn đoán</button>
+                <HiArrowNarrowRight className={styles.predictIcon} />
+                <button className="btn btn-primary" onClick={predictHandle}>
+                    Chuẩn đoán
+                </button>
             </div>
             <div>
                 <ImagePreview src={srcPred} name="Prediction Image" />
-                <span>Kết quả: {titlePred}</span>
+                <div className={styles.title}>
+                    <span className="text-danger">Kết quả:</span> {titlePred}
+                </div>
             </div>
         </div>
     );
