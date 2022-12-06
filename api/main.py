@@ -1,10 +1,11 @@
 from fastapi import FastAPI, UploadFile
+import uvicorn
 from PIL import Image
 from io import BytesIO
 import base64
 
 from model import create_model
-from utils import predict_img, overlay_img
+from utils import predict_img, overlay_img, get_title
 
 model = create_model()
 model.load_weights("./weights/weights_03-12-22-510637.hdf5")
@@ -20,10 +21,12 @@ def predict(file: UploadFile):
     img = Image.open(file.file)
     pred = predict_img(model, img)
 
+    title = get_title(pred)
+
     im_res = BytesIO()
     img = Image.fromarray(overlay_img(img, pred))
     img.save(im_res, "JPEG")
 
     res = base64.b64encode(im_res.getvalue())
 
-    return {"data": res}
+    return {"title": title, "data": res}
