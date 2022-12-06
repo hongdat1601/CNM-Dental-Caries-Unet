@@ -1,5 +1,5 @@
 from fastapi import FastAPI, UploadFile
-import uvicorn
+from fastapi.middleware.cors import CORSMiddleware
 from PIL import Image
 from io import BytesIO
 import base64
@@ -11,6 +11,14 @@ model = create_model()
 model.load_weights("./weights/weights_03-12-22-510637.hdf5")
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 def read_root():
@@ -30,3 +38,4 @@ def predict(file: UploadFile):
     res = base64.b64encode(im_res.getvalue())
 
     return {"title": title, "data": res}
+
